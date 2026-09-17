@@ -63,7 +63,10 @@ textarea{font:inherit}
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   text-align:center; padding:40px 22px}
 body.splash{overflow:hidden}
-.welcome-actions{display:flex; gap:14px; margin-top:38px; flex-wrap:wrap; justify-content:center}
+.welcome-actions{display:flex; flex-direction:column; gap:13px; margin-top:38px; align-items:center}
+.welcome-actions .start,.welcome-actions .opt{min-width:230px}
+.splash-lang{position:absolute; top:26px; right:26px}
+[dir="rtl"] .splash-lang{right:auto; left:26px}
 .hero{font-size:clamp(30px,6vw,54px); line-height:1.15; font-weight:500; max-width:15ch;
   margin:0 auto; transition:opacity .5s ease}
 .hero.fade{opacity:0}
@@ -246,22 +249,28 @@ sup{font-size:.62em; vertical-align:super}
 .topbar{display:flex; justify-content:flex-end; margin-bottom:6px}
 #optLang{width:100%; padding:11px 13px; background:var(--field); color:var(--text);
   border:1px solid var(--line-2); border-radius:var(--r-sm); font:inherit}
+#splashLang{background:var(--panel); color:var(--text); border:1px solid var(--line);
+  border-radius:999px; padding:6px 30px 6px 14px; font:inherit; font-size:13px; cursor:pointer;
+  appearance:none; -webkit-appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);
+  background-position:calc(100% - 16px) 51%, calc(100% - 11px) 51%;
+  background-size:5px 5px, 5px 5px; background-repeat:no-repeat}
 #uiLang{background:var(--panel); color:var(--text); border:1px solid var(--line);
   border-radius:999px; padding:6px 30px 6px 14px; font:inherit; font-size:13px; cursor:pointer;
   appearance:none; -webkit-appearance:none;
   background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);
   background-position:calc(100% - 16px) 51%, calc(100% - 11px) 51%;
   background-size:5px 5px, 5px 5px; background-repeat:no-repeat}
-#uiLang:hover{border-color:var(--gold)}
-#uiLang option{background:var(--panel); color:var(--text)}
-[dir="rtl"] #uiLang{padding:6px 14px 6px 30px; background-position:16px 51%, 21px 51%}
+#uiLang:hover,#splashLang:hover{border-color:var(--gold)}
+#uiLang option,#splashLang option{background:var(--panel); color:var(--text)}
+[dir="rtl"] #uiLang,[dir="rtl"] #splashLang{padding:6px 14px 6px 30px; background-position:16px 51%, 21px 51%}
 .legal{margin-top:46px; text-align:center; color:var(--muted); font-size:11.5px; letter-spacing:.05em; opacity:.8}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="topbar">
-    <select id="uiLang" data-i18n-aria="lang.aria"></select>
+    <select id="uiLang" class="langpick" data-i18n-aria="lang.aria"></select>
   </div>
 
   <div class="masthead">
@@ -276,6 +285,7 @@ sup{font-size:.62em; vertical-align:super}
   </button>
 
   <section id="view-welcome">
+    <div class="splash-lang"><select id="splashLang" class="langpick" data-i18n-aria="lang.aria"></select></div>
     <h1 class="hero" id="heroTitle">Générateur de fiches allergènes</h1>
     <p class="hero-sub" data-i18n="welcome.sub"></p>
     <div class="welcome-actions">
@@ -339,6 +349,9 @@ sup{font-size:.62em; vertical-align:super}
       <button class="linkish" id="openJournal" data-i18n="menu.journal"></button>
       <span class="hint" id="journalTeaser" style="margin-left:9px; display:inline"></span>
     </div>
+    <div style="text-align:center; margin-top:26px">
+      <button class="btn ghost" id="menuBack" data-i18n="options.back"></button>
+    </div>
   </section>
 
   <section id="view-options" hidden class="mid">
@@ -351,7 +364,7 @@ sup{font-size:.62em; vertical-align:super}
       </div>
       <div class="field">
         <label class="f" for="optLang" data-i18n="options.lang"></label>
-        <select id="optLang"></select>
+        <select id="optLang" class="langpick"></select>
       </div>
       <div class="actions">
         <button class="btn ghost" id="optBack" data-i18n="options.back"></button>
@@ -2314,7 +2327,7 @@ var JOST = SHEETFONTS.latin;
   }).join('');
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
 
-  var VERSION = '1.1.0';
+  var VERSION = '1.1.1';
   var THEME_KEY = 'fiche-allergenes-theme';
   var LANG_KEY = 'fiche-allergenes-lang';
   var lang = 'fr';
@@ -2417,6 +2430,7 @@ var JOST = SHEETFONTS.latin;
   $('startBtn').addEventListener('click', function () { showView('menu'); });
   $('optBtn').addEventListener('click', function () { showView('options'); });
   $('optBack').addEventListener('click', function () { showView('welcome'); });
+  $('menuBack').addEventListener('click', function () { showView('welcome'); });
 
   THEMES.forEach(function (th) {
     var b = document.createElement('button');
@@ -2445,7 +2459,7 @@ var JOST = SHEETFONTS.latin;
     Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-aria]'), function (el) {
       el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
     });
-    $('uiLang').value = lang; $('optLang').value = lang;
+    Array.prototype.forEach.call(document.querySelectorAll('select.langpick'), function (sel) { sel.value = lang; });
     document.documentElement.setAttribute('dir', I18N.rtl[lang] ? 'rtl' : 'ltr');
     // rebuild the pieces that hold translated text
     var names = UI_NAMES_NOW();
@@ -2462,20 +2476,18 @@ var JOST = SHEETFONTS.latin;
     o.value = l; o.textContent = I18N.names[l];
     $('uiLang').appendChild(o);
   });
-  I18N.langs.forEach(function (l) {
-    var o = document.createElement('option');
-    o.value = l; o.textContent = I18N.names[l];
-    $('optLang').appendChild(o);
-  });
-  $('optLang').addEventListener('change', function () {
-    $('uiLang').value = this.value;
-    $('uiLang').dispatchEvent(new Event('change'));
-  });
-  $('uiLang').addEventListener('change', function () {
-    lang = this.value;
-    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
-    applyLang();
-    if (view === 'journal') loadJournal();
+  Array.prototype.forEach.call(document.querySelectorAll('select.langpick'), function (sel) {
+    I18N.langs.forEach(function (l) {
+      var o = document.createElement('option');
+      o.value = l; o.textContent = I18N.names[l];
+      sel.appendChild(o);
+    });
+    sel.addEventListener('change', function () {
+      lang = this.value;
+      try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+      applyLang();
+      if (view === 'journal') loadJournal();
+    });
   });
 
   // ================= claude capabilities =================
@@ -2546,7 +2558,7 @@ var JOST = SHEETFONTS.latin;
     $('view-journal').hidden = v !== 'journal';
     $('view-options').hidden = v !== 'options';
     $('view-build').hidden = v !== 'build';
-    $('crumb').classList.toggle('on', v !== 'menu' && v !== 'welcome');
+    $('crumb').classList.toggle('on', v !== 'menu' && v !== 'welcome' && v !== 'options');
     document.body.classList.toggle('splash', v === 'welcome');
     if (v === 'welcome') startCycle(); else stopCycle();
     window.scrollTo(0, 0);
