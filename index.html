@@ -371,10 +371,18 @@ sup{font-size:.62em; vertical-align:super}
           <label class="f" style="margin-bottom:9px" data-i18n="f.allergens"></label>
           <div class="pick" id="pick"></div>
         </div>
-        <div class="field" style="margin-bottom:0">
+        <div class="field" style="margin-bottom:0; display:grid; gap:9px">
           <label class="switch">
             <input type="checkbox" id="frozen"><span class="track"></span>
             <span class="nm" data-i18n="f.frozen"></span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="halal"><span class="track"></span>
+            <span class="nm" data-i18n="f.halal"></span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" id="noPork"><span class="track"></span>
+            <span class="nm" data-i18n="f.noPork"></span>
           </label>
         </div>
         <div class="actions">
@@ -932,6 +940,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
 
       'f.category': 'Catégorie', 'f.product': 'Nom du produit',
       'f.allergens': 'Allergènes présents', 'f.frozen': 'Produit surgelé',
+      'f.halal': 'Halal', 'f.noPork': 'Sans porc',
       'ph.brand': 'Beefbar Milano', 'ph.category': 'Beef (street food)', 'ph.product': 'Kobe coq',
       'btn.next': 'Suivant', 'btn.saveEdit': 'Enregistrer', 'btn.done': 'Terminer',
       'btn.cancelEdit': 'Annuler la modification', 'btn.delete': 'Supprimer ce produit',
@@ -952,7 +961,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
       'diff.none': 'Aucun changement à appliquer.',
       'diff.count.one': '{n} changement', 'diff.count.many': '{n} changements',
       'diff.apply': 'Appliquer', 'diff.cancel': 'Annuler',
-      'diff.noAllergen': 'aucun allergène', 'diff.frozen': ', surgelé',
+      'diff.noAllergen': 'aucun allergène', 'diff.frozen': ', surgelé', 'diff.halal': ', halal', 'diff.noPork': ', sans porc',
 
       'files.title': 'Vos fiches sont prêtes',
       'files.hint': 'Même grille, même date, même ordre des produits dans les trois versions.',
@@ -1075,6 +1084,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
 
       'f.category': 'Category', 'f.product': 'Product name',
       'f.allergens': 'Allergens present', 'f.frozen': 'Frozen product',
+      'f.halal': 'Halal', 'f.noPork': 'Pork-free',
       'ph.brand': 'Beefbar Milano', 'ph.category': 'Beef (street food)', 'ph.product': 'Kobe coq',
       'btn.next': 'Next', 'btn.saveEdit': 'Save', 'btn.done': 'Finish',
       'btn.cancelEdit': 'Cancel the edit', 'btn.delete': 'Delete this product',
@@ -1095,7 +1105,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
       'diff.none': 'No change to apply.',
       'diff.count.one': '{n} change', 'diff.count.many': '{n} changes',
       'diff.apply': 'Apply', 'diff.cancel': 'Cancel',
-      'diff.noAllergen': 'no allergen', 'diff.frozen': ', frozen',
+      'diff.noAllergen': 'no allergen', 'diff.frozen': ', frozen', 'diff.halal': ', halal', 'diff.noPork': ', pork-free',
 
       'files.title': 'Your sheets are ready',
       'files.hint': 'Same grid, same date, same product order in all three versions.',
@@ -1218,6 +1228,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
 
       'f.category': 'Categoria', 'f.product': 'Nome del prodotto',
       'f.allergens': 'Allergeni presenti', 'f.frozen': 'Prodotto surgelato',
+      'f.halal': 'Halal', 'f.noPork': 'Senza maiale',
       'ph.brand': 'Beefbar Milano', 'ph.category': 'Beef (street food)', 'ph.product': 'Kobe coq',
       'btn.next': 'Avanti', 'btn.saveEdit': 'Salvare', 'btn.done': 'Terminare',
       'btn.cancelEdit': 'Annullare la modifica', 'btn.delete': 'Eliminare questo prodotto',
@@ -1238,7 +1249,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
       'diff.none': 'Nessuna modifica da applicare.',
       'diff.count.one': '{n} modifica', 'diff.count.many': '{n} modifiche',
       'diff.apply': 'Applicare', 'diff.cancel': 'Annullare',
-      'diff.noAllergen': 'nessun allergene', 'diff.frozen': ', surgelato',
+      'diff.noAllergen': 'nessun allergene', 'diff.frozen': ', surgelato', 'diff.halal': ', halal', 'diff.noPork': ', senza maiale',
 
       'files.title': 'I vostri elenchi sono pronti',
       'files.hint': 'Stessa griglia, stessa data, stesso ordine dei prodotti nelle tre versioni.',
@@ -1337,6 +1348,8 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
   var NAME_WORDS = ['produit', 'produits', 'nom', 'nom du produit', 'nome', 'prodotto', 'prodotti', 'name', 'dish',
     'plat', 'plats', 'piatto', 'item', 'article', 'designation', 'libelle', 'recette'];
   var FROZEN_WORDS = ['surgele', 'surgelee', 'surgelato', 'frozen', 'congele', 'congelato', 'surgeles'];
+  var HALAL_WORDS = ['halal'];
+  var NOPORK_WORDS = ['sans porc', 'senza maiale', 'pork free', 'porkfree', 'no pork', 'sans porcs', 'senza suino'];
   var ALLERG_COL_WORDS = ['allergenes', 'allergene', 'allergeni', 'allergens', 'allergen'];
   var YES = ['x', 'xx', 'o', 'v', 'oui', 'si', 'yes', 'y', '1', 'true', 'vrai', 'ok', 'present', 'presente',
     'da', 'ja', 'check', 'coche'];
@@ -1410,12 +1423,14 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
     else return { ok: false, reason: 'Aucune colonne d\u2019allergènes n\u2019a été reconnue. Le fichier doit comporter une ligne d\u2019en-tête nommant les allergènes, ou une colonne « Allergènes ».' };
 
     var header = rows[hi];
-    var catCol = -1, nameCol = -1, frozenCol = -1, allergTextCol = -1;
+    var catCol = -1, nameCol = -1, frozenCol = -1, allergTextCol = -1, halalCol = -1, porkCol = -1;
     for (var c2 = 0; c2 < header.length; c2++) {
       if (catCol < 0 && inList(header[c2], CAT_WORDS)) catCol = c2;
       if (nameCol < 0 && inList(header[c2], NAME_WORDS)) nameCol = c2;
       if (frozenCol < 0 && inList(header[c2], FROZEN_WORDS)) frozenCol = c2;
       if (allergTextCol < 0 && inList(header[c2], ALLERG_COL_WORDS)) allergTextCol = c2;
+      if (halalCol < 0 && inList(header[c2], HALAL_WORDS)) halalCol = c2;
+      if (porkCol < 0 && inList(header[c2], NOPORK_WORDS)) porkCol = c2;
     }
 
     // 2. no per-allergen columns: we need a written-out "allergens" column
@@ -1428,6 +1443,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
       for (var c3 = 0; c3 < Math.max(header.length, 2); c3++) {
         if (colMap && colMap[c3] !== undefined) continue;
         if (c3 === catCol || c3 === frozenCol || c3 === allergTextCol) continue;
+        if (c3 === halalCol || c3 === porkCol) continue;
         nameCol = c3; break;
       }
     }
@@ -1457,6 +1473,8 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
 
       if (!name) continue;
       var frozen = false;
+      var halal = halalCol >= 0 && isYes(row[halalCol]);
+      var noPork = porkCol >= 0 && isYes(row[porkCol]);
       if (frozenCol >= 0 && isYes(row[frozenCol])) frozen = true;
       if (/\(\s*1\s*\)\s*$/.test(name) || /\u00b9$/.test(name)) {
         frozen = true;
@@ -1473,7 +1491,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
         });
       }
       allerg = allerg.filter(function (v, i, arr) { return arr.indexOf(v) === i; }).sort(function (x, y) { return x - y; });
-      items.push({ category: current, name: name, frozen: frozen, allergens: allerg });
+      items.push({ category: current, name: name, frozen: frozen, halal: halal, noPork: noPork, allergens: allerg });
     }
 
     if (!items.length) {
@@ -1558,7 +1576,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
   var L = {
     it: {
       title: 'ELENCO DEGLI ALLERGENI',
-      frozen: 'Prodotto surgelato',
+      frozen: 'Prodotto surgelato', halal: 'Halal', noPork: 'Senza maiale',
       updated: function (d) { return 'Elenco aggiornato il ' + d; },
       months: ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'],
       date: function (dd, mm, yy) { return dd + ' ' + mm + ' ' + yy; },
@@ -1584,7 +1602,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
     },
     fr: {
       title: 'LISTE DES ALLERGÈNES',
-      frozen: 'Produit surgelé',
+      frozen: 'Produit surgelé', halal: 'Halal', noPork: 'Sans porc',
       updated: function (d) { return 'Liste mise à jour le ' + d; },
       months: ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'],
       date: function (dd, mm, yy) { return (dd === 1 ? '1er' : dd) + ' ' + mm + ' ' + yy; },
@@ -1610,7 +1628,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
     },
     en: {
       title: 'ALLERGEN LIST',
-      frozen: 'Frozen product',
+      frozen: 'Frozen product', halal: 'Halal', noPork: 'Pork-free',
       updated: function (d) { return 'List updated on ' + d; },
       months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
       date: function (dd, mm, yy) { return dd + ' ' + mm + ' ' + yy; },
@@ -1661,7 +1679,15 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
 
     var d = cfg.date ? new Date(cfg.date) : new Date();
     var dateStr = t.updated(t.date(d.getDate(), t.months[d.getMonth()], d.getFullYear()));
-    var anyFrozen = cfg.items.some(function (i) { return i.frozen; });
+    var FLAGS = [];
+    [['frozen', t.frozen], ['halal', t.halal], ['noPork', t.noPork]].forEach(function (f) {
+      if (cfg.items.some(function (i) { return i[f[0]]; })) FLAGS.push({ key: f[0], label: f[1] });
+    });
+    function marksFor(it) {
+      var out = '';
+      FLAGS.forEach(function (f, i) { if (it[f.key]) out += '(' + (i + 1) + ')'; });
+      return out;
+    }
     var groups = groupByCategory(cfg.items);
 
     // ---- helpers -------------------------------------------------------
@@ -1677,13 +1703,26 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
     }
 
     function footer() {
-      if (anyFrozen) {
-        setF('bold', 6.4);
-        doc.text('(1)', X0, FOOT_BASE - 3.3);
-        var w = doc.getTextWidth('(1)');
-        setF('italic', 10);
-        doc.text(t.frozen, X0 + w + 1, FOOT_BASE);
-      }
+      setF('normal', 10);
+      var dateW = doc.getTextWidth(dateStr);
+      var size = 10, room = X1 - X0 - dateW - 14;
+      var need = function (sz) {
+        setF('italic', sz);
+        var tot = 0;
+        FLAGS.forEach(function (f, i) { tot += doc.getTextWidth('(' + (i + 1) + ')' + ' ' + f.label) + 12; });
+        return tot;
+      };
+      while (size > 7 && need(size) > room) size -= 0.5;
+      var x = X0;
+      FLAGS.forEach(function (f, i) {
+        var n = '(' + (i + 1) + ')';
+        setF('bold', size * 0.64);
+        doc.text(n, x, FOOT_BASE - size * 0.33);
+        var w = doc.getTextWidth(n);
+        setF('italic', size);
+        doc.text(f.label, x + w + 1, FOOT_BASE);
+        x += w + 1 + doc.getTextWidth(f.label) + 12;
+      });
       setF('normal', 10);
       doc.text(dateStr, X1, FOOT_BASE, { align: 'right' });
     }
@@ -1766,6 +1805,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
       drawBand();
 
       prepared.forEach(function (p) {
+        var mk = marksFor(p.it);
         if (y + p.h > BODY_MAX) { newPage(); drawBand(); }
         // allergen cells
         doc.setFillColor(FILL[0], FILL[1], FILL[2]);
@@ -1778,12 +1818,12 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
         p.lines.forEach(function (ln, li) {
           doc.text(ln, X0 + 4.05, y + BASE1 + li * LINE_H);
         });
-        if (p.it.frozen) {
+        if (mk) {
           var last = p.lines[p.lines.length - 1];
           setF('normal', 10);
           var wl = doc.getTextWidth(last);
           setF('normal', 5.83);
-          doc.text('(1)', X0 + 4.05 + wl + 0.5,
+          doc.text(mk, X0 + 4.05 + wl + 0.5,
             y + BASE1 + (p.lines.length - 1) * LINE_H - SUP_DY);
         }
         // grid
@@ -1856,7 +1896,8 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
       var payload = JSON.stringify({
         v: 1, brand: cfg.brand || '', date: cfg.date || '', color: cfg.color || '',
         items: (cfg.items || []).map(function (i) {
-          return { category: i.category, name: i.name, frozen: !!i.frozen, allergens: i.allergens || [] };
+          return { category: i.category, name: i.name, frozen: !!i.frozen, halal: !!i.halal,
+                   noPork: !!i.noPork, allergens: i.allergens || [] };
         })
       });
       var utf8 = unescape(encodeURIComponent(payload));
@@ -1914,7 +1955,8 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
     '7 tree nuts, 8 celery, 9 mustard, 10 sesame, 11 sulphites, 12 lupin, 13 molluscs, ' +
     '14 broad beans (fèves / fave / fava beans — a 15th column required in Monaco, beyond the EU 14)';
   var SHAPE = '{"ok":true,"brand":"...","date":"YYYY-MM-DD or empty string",' +
-    '"items":[{"category":"...","name":"...","frozen":true or false,"allergens":[0,2,6]}]}';
+    '"items":[{"category":"...","name":"...","frozen":true or false,"halal":true or false,' +
+    '"noPork":true or false,"allergens":[0,2,6]}]}';
   var ANSWER_LANG = { fr: 'French', en: 'English', it: 'Italian' };
 
   var KEY = 'fiche-allergenes-v1';
@@ -2202,13 +2244,17 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
     if (!cat) { $('err2').textContent = t('err.category'); $('cat').focus(); return null; }
     if (!name) { $('err2').textContent = t('err.product'); $('pname').focus(); return null; }
     $('err2').textContent = '';
-    return { category: cat, name: name, frozen: $('frozen').checked, allergens: checked() };
+    return { category: cat, name: name, frozen: $('frozen').checked,
+      halal: $('halal').checked, noPork: $('noPork').checked, allergens: checked() };
   }
   function commit() {
     var v = collect(); if (!v) return false;
     if (editId) {
       state.items.forEach(function (it) {
-        if (it.id === editId) { it.category = v.category; it.name = v.name; it.frozen = v.frozen; it.allergens = v.allergens; }
+        if (it.id === editId) {
+          it.category = v.category; it.name = v.name; it.frozen = v.frozen;
+          it.halal = v.halal; it.noPork = v.noPork; it.allergens = v.allergens;
+        }
       });
       stopEdit();
     } else { v.id = uid(); state.items.push(v); }
@@ -2217,7 +2263,8 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
   }
   function clearForm(keepCat) {
     if (!keepCat) $('cat').value = '';
-    $('pname').value = ''; $('frozen').checked = false; setChecked([]);
+    $('pname').value = ''; $('frozen').checked = false; $('halal').checked = false;
+    $('noPork').checked = false; setChecked([]);
   }
   function stopEdit() { editId = null; $('editActions').hidden = true; $('btnNext').textContent = t('btn.next'); }
 
@@ -2240,13 +2287,26 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
     if (!it) return;
     editId = id;
     $('cat').value = it.category; $('pname').value = it.name;
-    $('frozen').checked = !!it.frozen; setChecked(it.allergens || []);
+    $('frozen').checked = !!it.frozen; $('halal').checked = !!it.halal;
+    $('noPork').checked = !!it.noPork; setChecked(it.allergens || []);
     $('editActions').hidden = false; $('btnNext').textContent = t('btn.saveEdit');
     showStep(1); render();
   }
 
   // ================= preview =================
+  var FLAG_KEYS = ['frozen', 'halal', 'noPork'];
+  function activeFlags() {
+    return FLAG_KEYS.filter(function (k) {
+      return state.items.some(function (i) { return i[k]; });
+    });
+  }
+  function marksFor(it, flags) {
+    var out = '';
+    flags.forEach(function (k, i) { if (it[k]) out += '(' + (i + 1) + ')'; });
+    return out;
+  }
   function render() {
+    var flags = activeFlags();
     $('tab2').disabled = state.items.length === 0;
     var nc = categories().length;
     $('count').textContent = state.items.length
@@ -2267,7 +2327,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
       body += '<tr class="band"><td colspan="16">' + esc(c) + '</td><td class="act"></td></tr>';
       state.items.filter(function (i) { return i.category === c; }).forEach(function (it) {
         body += '<tr class="row' + (it.id === editId ? ' editing' : '') + '"><td class="lab">' + esc(it.name) +
-          (it.frozen ? '<sup>(1)</sup>' : '') + '</td>';
+          (marksFor(it, flags) ? '<sup>' + marksFor(it, flags) + '</sup>' : '') + '</td>';
         for (var k = 0; k < 15; k++) {
           body += '<td class="cell' + ((it.allergens || []).indexOf(k) >= 0 ? ' on' : '') + '"></td>';
         }
@@ -2294,7 +2354,8 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
       var a = Array.isArray(r.allergens) ? r.allergens : [];
       a = a.map(Number).filter(function (n) { return n >= 0 && n < 15 && Math.floor(n) === n; });
       a = a.filter(function (v, i, arr) { return arr.indexOf(v) === i; }).sort(function (x, y) { return x - y; });
-      items.push({ id: uid(), category: cat, name: name, frozen: !!r.frozen, allergens: a });
+      items.push({ id: uid(), category: cat, name: name, frozen: !!r.frozen,
+        halal: !!r.halal, noPork: !!r.noPork, allergens: a });
     });
     return items.length ? items : null;
   }
@@ -2378,7 +2439,9 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
           'Each page holds a table: the first column lists dish names, the next columns are the allergens, ' +
           'and a filled or coloured cell means that dish contains that allergen. A wide coloured band spanning the table is a category heading.\n\n' +
           'Read the column captions (they may be Italian, French or English) and map every column to this fixed index order: ' + INDEX_NOTE + '.\n' +
-          'A superscript (1) after a dish name means frozen: set "frozen":true and leave the marker out of the name.\n' +
+          'Superscript numbers after a dish name refer to the notes printed at the foot of the page: read those notes and ' +
+          'set "frozen", "halal" or "noPork" accordingly, leaving the markers out of the name. ' +
+          'Set a flag to false when the sheet says nothing about it.\n' +
           'Keep dish names and category names exactly as printed, in their original language, in the printed order. ' +
           'Ignore the explanatory allergen key at the end of the document — it is not a product.\n\n' +
           'Answer with JSON only, no prose and no code fence, in this shape:\n' + SHAPE + '\n\n' +
@@ -2457,7 +2520,8 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
           'Allergen index order: ' + INDEX_NOTE + '.\n' +
           'The source may mark an allergen with x, a tick, "oui", "sì", "yes", or by spelling the allergen out in a cell. ' +
           'Treat any positive marker as present and an empty cell as absent. Column captions may be Italian, French or English. ' +
-          'A mention of frozen / surgelé / surgelato sets "frozen":true.\n' +
+          'A mention of frozen / surgelé / surgelato sets "frozen":true; halal sets "halal":true; ' +
+          'pork-free / sans porc / senza maiale sets "noPork":true. Leave a flag false when the source says nothing about it.\n' +
           'Keep product and category names exactly as written, in their original language and order.\n\n' +
           'Answer with JSON only, no prose and no code fence:\n' + SHAPE + '\n\n' +
           'Every product needs all three of: a category, a name, and its allergens. ' +
@@ -2490,11 +2554,11 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
   // downloadable template, so the expected layout is never a guess
   $('tplBtn').addEventListener('click', function () {
     if (!window.XLSX) { $('listErr').textContent = t('xlsx.missing'); return; }
-    var head = [t('f.category'), t('f.product'), t('f.frozen')].concat(UI_NAMES_NOW());
+    var head = [t('f.category'), t('f.product'), t('f.frozen'), t('f.halal'), t('f.noPork')].concat(UI_NAMES_NOW());
     var rows = [head,
-      ['Beef (street food)', 'Kobe coq', '', '', '', '', 'x', '', 'x', 'x', 'x', 'x', '', '', 'x', '', '', ''],
-      ['Beef (street food)', 'Bad boy bao', 'x', '', '', '', '', '', 'x', 'x', 'x', 'x', 'x', '', 'x', '', '', 'x'],
-      ['Dessert', 'Marble bar', '', 'x', '', 'x', '', '', '', 'x', 'x', '', '', '', '', '', '', '']];
+      ['Beef (street food)', 'Kobe coq', '', 'x', 'x', '', '', '', 'x', '', 'x', 'x', 'x', 'x', '', '', 'x', '', '', ''],
+      ['Beef (street food)', 'Bad boy bao', 'x', '', 'x', '', '', '', '', '', 'x', 'x', 'x', 'x', 'x', '', 'x', '', '', 'x'],
+      ['Dessert', 'Marble bar', '', '', '', 'x', '', 'x', '', '', '', 'x', 'x', '', '', '', '', '', '', '']];
     var ws = XLSX.utils.aoa_to_sheet(rows);
     var wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Allergenes');
@@ -2512,7 +2576,10 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
   }
 
   // ================= assistant : edit in one sentence =================
-  function strip(i) { return { category: i.category, name: i.name, frozen: !!i.frozen, allergens: i.allergens || [] }; }
+  function strip(i) {
+    return { category: i.category, name: i.name, frozen: !!i.frozen,
+      halal: !!i.halal, noPork: !!i.noPork, allergens: i.allergens || [] };
+  }
   function keyOf(i) { return (i.category + '|' + i.name).toLowerCase().replace(/\s+/g, ' ').trim(); }
 
   $('aiRun').addEventListener('click', function () {
@@ -2558,7 +2625,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
     Object.keys(after).forEach(function (k) {
       if (!before[k]) added.push(after[k]);
       else if (JSON.stringify((before[k].allergens || []).slice().sort()) !== JSON.stringify((after[k].allergens || []).slice().sort())
-        || !!before[k].frozen !== !!after[k].frozen) changed.push(after[k]);
+        || FLAG_KEYS.some(function (f) { return !!before[k][f] !== !!after[k][f]; })) changed.push(after[k]);
     });
     Object.keys(before).forEach(function (k) { if (!after[k]) removed.push(before[k]); });
 
@@ -2569,7 +2636,7 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
       html += '<strong>' + plural(added.length + removed.length + changed.length, 'diff') + '</strong><ul>';
       added.forEach(function (i) { html += '<li class="add">+ ' + esc(i.name) + ' <span style="opacity:.7">(' + esc(i.category) + ') — ' + allergNames(i) + '</span></li>'; });
       removed.forEach(function (i) { html += '<li class="del">− ' + esc(i.name) + ' <span style="opacity:.7">(' + esc(i.category) + ')</span></li>'; });
-      changed.forEach(function (i) { html += '<li>~ ' + esc(i.name) + ' <span style="opacity:.7">→ ' + allergNames(i) + (i.frozen ? t('diff.frozen') : '') + '</span></li>'; });
+      changed.forEach(function (i) { html += '<li>~ ' + esc(i.name) + ' <span style="opacity:.7">→ ' + allergNames(i) + flagWords(i) + '</span></li>'; });
       html += '</ul><div class="actions plain"><button class="btn" id="diffOk">' + t('diff.apply') + '</button>' +
         '<button class="btn ghost" id="diffNo">' + t('diff.cancel') + '</button></div>';
     }
@@ -2585,6 +2652,10 @@ var JOST = {"regular": "AAEAAAAPAIAAAwBwR0RFRgARAOgAAF3EAAAAFkdQT1Nbj1LjAABd3AAA
       });
       $('diffNo').addEventListener('click', function () { pendingEdit = null; $('aiDiff').innerHTML = ''; });
     }
+  }
+  function flagWords(i) {
+    return FLAG_KEYS.filter(function (k) { return i[k]; })
+      .map(function (k) { return t('diff.' + k); }).join('');
   }
   function allergNames(i) {
     var a = i.allergens || [];
